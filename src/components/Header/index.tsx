@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import useBooks from '../../context/BooksContext';
 import useSearch from '../../context/SearchContext';
+import beonLogo from '../../assets/images/beon-logo-roxo.png';
+import * as Styled from './style';
 
 function Header() {
   const { updateSearch } = useSearch();
@@ -13,7 +15,7 @@ function Header() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateSearch({ q: query });
+    updateSearch({ q: query, page: 1 });
   };
 
   const handleMinYearChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +27,13 @@ function Header() {
   };
 
   return (
-    <header data-testid="header">
-      <section>
-        <span>Icone</span>
-        <form onSubmit={handleSubmit}>
+    <Styled.Wrapper data-testid="header">
+      <Styled.TopSection>
+        <img src={beonLogo} alt="Icone da Beon" />
+        <Styled.Form onSubmit={handleSubmit}>
           <input
             data-testid="input-query"
-            placeholder="Busque livros pelo autor, título ou idioma"
+            placeholder="Autor, título ou idioma"
             onChange={handleInputQueryChange}
             value={query}
           />
@@ -41,26 +43,34 @@ function Header() {
           >
             Buscar
           </button>
-        </form>
-      </section>
-      <section>
-        <input
-          data-testid="min-year"
-          type="number"
-          onChange={handleMinYearChange}
-        />
-        <input
-          data-testid="max-year"
-          type="number"
-          onChange={handleMaxYearChange}
-        />
+        </Styled.Form>
+      </Styled.TopSection>
+      <Styled.BottomSection>
+        <label htmlFor="min-year">
+          Ano minimo:
+          <input
+            id="min-year"
+            data-testid="min-year"
+            type="number"
+            onChange={handleMinYearChange}
+          />
+        </label>
+        <label htmlFor="max-year">
+          Ano maximo:
+          <input
+            id="max-year"
+            data-testid="max-year"
+            type="number"
+            onChange={handleMaxYearChange}
+          />
+        </label>
         <h3 data-testid="result-count">
           {totalCount}
           {' '}
           resultados encontrados
         </h3>
-      </section>
-    </header>
+      </Styled.BottomSection>
+    </Styled.Wrapper>
   );
 }
 

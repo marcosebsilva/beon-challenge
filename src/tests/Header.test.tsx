@@ -19,7 +19,7 @@ describe('Header', () => {
   it('the query input has the expected placeholder', () => {
     const queryInput = screen.getByTestId('input-query');
     const actual = queryInput.getAttribute('placeholder');
-    const expected = 'Busque livros pelo autor, título ou idioma';
+    const expected = 'Autor, título ou idioma';
 
     expect(actual).toEqual(expected);
   });
