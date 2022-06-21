@@ -31,10 +31,12 @@ describe('Header', () => {
   it('has option to determine minimum year range', () => {
     const minYear = screen.queryByTestId('min-year');
     expect(minYear).toBeTruthy();
+    expect(minYear?.tagName).toBe('INPUT');
   });
   it('has option to determine max year range', () => {
     const maxYear = screen.queryByTestId('max-year');
     expect(maxYear).toBeTruthy();
+    expect(maxYear?.tagName).toBe('INPUT');
   });
   it('has a element to show total result count', () => {
     const resultCount = screen.queryByTestId('result-count');

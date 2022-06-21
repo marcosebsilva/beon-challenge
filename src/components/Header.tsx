@@ -1,9 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import useBooks from '../context/BooksContext';
 import useSearch from '../context/SearchContext';
 
 function Header() {
   const { updateSearch } = useSearch();
   const [query, setQuery] = useState<string>('');
+  const { totalCount } = useBooks();
 
   const handleInputQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -49,7 +51,11 @@ function Header() {
           type="number"
           onChange={handleMaxYearChange}
         />
-        <h3 data-testid="result-count">100 resultados encontrados</h3>
+        <h3 data-testid="result-count">
+          {totalCount}
+          {' '}
+          resultados encontrados
+        </h3>
       </section>
     </header>
   );

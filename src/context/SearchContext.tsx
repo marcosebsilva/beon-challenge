@@ -1,11 +1,10 @@
 import React, { useContext, useMemo, useState } from 'react';
 import ApiOptions from '../interfaces/ApiOptions';
 
-interface ContextValues extends ApiOptions {
-  // eslint-disable-next-line no-unused-vars
-  updateSearch(newValue: Partial<ApiOptions>): any;
+interface SearchContextValue extends ApiOptions {
+  updateSearch(newValue: Partial<ApiOptions>): void;
 }
-const initialContext: ContextValues = {
+const initialContext: SearchContextValue = {
   page: 1,
   limit: 10,
   updateSearch: () => {
@@ -13,12 +12,12 @@ const initialContext: ContextValues = {
   },
 };
 
-const SearchContext = React.createContext<ContextValues>(initialContext);
+const SearchContext = React.createContext<SearchContextValue>(initialContext);
 
 export function SearchProvider({ children }: React.PropsWithChildren) {
-  const [searchParameters, setSearchParameters] = useState<ContextValues>(initialContext);
+  const [searchParameters, setSearchParameters] = useState<SearchContextValue>(initialContext);
 
-  const updateSearch = (newValue: Partial<ContextValues>) => {
+  const updateSearch = (newValue: Partial<ApiOptions>) => {
     setSearchParameters((prev) => ({ ...prev, ...newValue }));
   };
 
