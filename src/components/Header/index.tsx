@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import useBooks from '../context/BooksContext';
-import useSearch from '../context/SearchContext';
+import useBooks from '../../context/BooksContext';
+import useSearch from '../../context/SearchContext';
 
 function Header() {
   const { updateSearch } = useSearch();
@@ -26,20 +26,23 @@ function Header() {
 
   return (
     <header data-testid="header">
-      <form onSubmit={handleSubmit}>
-        <input
-          data-testid="input-query"
-          placeholder="Busque livros pelo autor, título ou idioma"
-          onChange={handleInputQueryChange}
-          value={query}
-        />
-        <button
-          type="submit"
-          data-testid="query-button"
-        >
-          Buscar
-        </button>
-      </form>
+      <section>
+        <span>Icone</span>
+        <form onSubmit={handleSubmit}>
+          <input
+            data-testid="input-query"
+            placeholder="Busque livros pelo autor, título ou idioma"
+            onChange={handleInputQueryChange}
+            value={query}
+          />
+          <button
+            type="submit"
+            data-testid="query-button"
+          >
+            Buscar
+          </button>
+        </form>
+      </section>
       <section>
         <input
           data-testid="min-year"
