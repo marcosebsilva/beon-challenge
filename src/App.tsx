@@ -1,10 +1,15 @@
 import React from 'react';
+import BookTable from './components/BookTable';
+import Header from './components/Header';
+import PageController from './components/PageController';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Home</h1>
-    </div>
+    <>
+      <Header />
+      <BookTable />
+      <PageController />
+    </>
   );
 }
 

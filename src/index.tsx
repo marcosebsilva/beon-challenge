@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import Modal from 'react-modal';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { SearchProvider } from './context/SearchContext';
 import { BooksProvider } from './context/BooksContext';
+import GlobalStyles from './globalStyles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
+Modal.setAppElement('#root');
+
 root.render(
   <React.StrictMode>
+    <GlobalStyles />
     <SearchProvider>
       <BooksProvider>
         <App />
