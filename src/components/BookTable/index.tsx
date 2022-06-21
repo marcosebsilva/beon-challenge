@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import Modal from 'react-modal';
 import { getAllBooks, getBooksByQuery } from '../../api/calls';
 import useBooks from '../../context/BooksContext';
 import Book from '../../interfaces/Book';
 import useSearch from '../../context/SearchContext';
+import * as Styled from './style';
 
 export default function BookTable() {
   const { updateBooks, books } = useBooks();
@@ -39,15 +39,48 @@ export default function BookTable() {
   const tableHeads = ['Livro', 'Autor', 'Idioma', 'Ano', 'Acões'];
 
   return (
-    <>
-      <Modal
+    <Styled.Wrapper>
+      <Styled.DetailsModal
         isOpen={showModal}
         onRequestClose={() => toggleModal()}
       >
-        <h1>{modalData?.author}</h1>
-        <h2>{modalData?.link}</h2>
-      </Modal>
-      <table data-testid="table">
+        <h1>
+          Título:
+          {' '}
+          {modalData?.title}
+        </h1>
+        <h3>
+          Autor:
+          {' '}
+          <mark>{modalData?.author}</mark>
+        </h3>
+        <h3>
+          País:
+          {' '}
+          <mark>{modalData?.country}</mark>
+        </h3>
+        <h3>
+          Ano:
+          {' '}
+          <mark>{modalData?.year}</mark>
+        </h3>
+        <h3>
+          Páginas:
+          {' '}
+          <mark>{modalData?.pages}</mark>
+        </h3>
+        <h3>
+          Língua:
+          {' '}
+          <mark>{modalData?.language}</mark>
+        </h3>
+        <h3>
+          Link:
+          {' '}
+          <a href={modalData?.link} target="_blank" rel="noreferrer">{modalData?.link}</a>
+        </h3>
+      </Styled.DetailsModal>
+      <Styled.Table data-testid="table">
         <thead>
           <tr>
             {tableHeads.map((head) => <th data-testid="table-head" key={head}>{head}</th>)}
@@ -61,7 +94,7 @@ export default function BookTable() {
               <td>{book.language}</td>
               <td>{book.year}</td>
               <td>
-                <span
+                <Styled.ToggleModal
                   role="button"
                   data-testid="show-modal"
                   tabIndex={0}
@@ -69,12 +102,12 @@ export default function BookTable() {
                   onClick={() => toggleModal(book)}
                 >
                   Detalhes
-                </span>
+                </Styled.ToggleModal>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-    </>
+      </Styled.Table>
+    </Styled.Wrapper>
   );
 }
