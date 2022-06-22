@@ -28,6 +28,12 @@ export const Pagination = styled(ReactPaginate)`
     color: white;
     background: purple;
   }
+
+  .disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    background-color: #f5f5f5;
+  }
 `;
 
 export const Wrapper = styled.div`

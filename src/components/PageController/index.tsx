@@ -8,10 +8,12 @@ interface ActivePageObject {
 }
 export default function PageController() {
   const { totalCount } = useBooks();
-  const { limit, updateSearch } = useSearch();
+  const { limit, page, updateSearch } = useSearch();
   const [showError, setShowError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>('');
+
   const numberOfPages = useMemo(() => Math.ceil(totalCount / limit), [totalCount, limit]);
+  const currentPage = useMemo(() => page - 1, [page]);
 
   const handlePageClick = ({ selected }: ActivePageObject) => {
     updateSearch({ page: selected + 1 });
@@ -39,8 +41,10 @@ export default function PageController() {
       <Styled.Pagination
         pageCount={numberOfPages}
         marginPagesDisplayed={1}
-        previousClassName="previousButton"
-        nextClassName="nextButton"
+        forcePage={currentPage}
+        nextLabel="Próximo"
+        previousLabel="Anterior"
+        disabledClassName="disabled"
         pageRangeDisplayed={2}
         onPageChange={handlePageClick}
       />
