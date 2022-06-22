@@ -19,7 +19,7 @@ export default function BookTable() {
   const handleUpdateOptions = useCallback(async () => {
     try {
       const { updateSearch, ...optionsWithoutUpdateFunction } = options;
-      if (options.q || options.year_gte || options.year_lte) {
+      if (options.q || options.year_gte !== undefined || options.year_lte !== undefined) {
         const result = await getBooksByQuery(optionsWithoutUpdateFunction);
         updateBooks(result);
       } else {

@@ -6,7 +6,7 @@ import * as Styled from './style';
 interface ActivePageObject {
   selected: number,
 }
-export default function PageController() {
+export default function PaginationController() {
   const { totalCount } = useBooks();
   const { limit, page, updateSearch } = useSearch();
   const [showError, setShowError] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import React from 'react';
 import BookTable from './components/BookTable';
 import Header from './components/Header';
-import PageController from './components/PageController';
+import PageController from './components/PaginationController';
 
 function App() {
   return (

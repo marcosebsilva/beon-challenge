@@ -9,7 +9,7 @@ const initialContext: BooksContextValue = {
   totalCount: 0,
   books: [],
   updateBooks: () => {
-    throw new Error('updateSearch function must be overridden');
+    throw new Error('updateBooks function must be overridden');
   },
 };
 
