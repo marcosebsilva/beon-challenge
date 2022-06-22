@@ -1,5 +1,5 @@
 import React, { useMemo, ChangeEvent, useState } from 'react';
-import { updateSearchType } from '../../context/SearchContext';
+import { updateSearchType } from '../../interfaces/SearchContextValue';
 import * as Styled from './style';
 
 interface ActivePageObject {
