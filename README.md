@@ -72,6 +72,6 @@ Retorna um objeto com dois valores:
 ## Testes
 Abre o Cypress com:
 ```sh
-npm run cypress:open
+npm run tests:cypress
 ```
 Escolhe uma categoria de testes e execute qualquer uma das specs disponíveis.
