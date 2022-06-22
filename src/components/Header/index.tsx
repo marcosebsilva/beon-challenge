@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import beonLogo from '../../assets/images/beon-logo-roxo.png';
 import * as Styled from './style';
-import { updateSearchType } from '../../context/SearchContext';
+import { updateSearchType } from '../../interfaces/SearchContextValue';
 
 interface Props {
   updateSearch: updateSearchType

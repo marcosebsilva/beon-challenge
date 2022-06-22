@@ -1,9 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import ApiResponse from '../interfaces/ApiResponse';
-
-export interface BooksContextValue extends ApiResponse{
-  updateBooks: React.Dispatch<React.SetStateAction<ApiResponse>>,
-}
+import BooksContextValue from '../interfaces/BooksContextValue';
 
 const initialContext: BooksContextValue = {
   totalCount: 0,

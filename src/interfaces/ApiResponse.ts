@@ -1,8 +1,8 @@
 import Book from './Book';
 
-interface BooksContextValue {
+interface ApiResponse {
   totalCount: number,
   books: Book[],
 }
 
-export default BooksContextValue;
+export default ApiResponse;

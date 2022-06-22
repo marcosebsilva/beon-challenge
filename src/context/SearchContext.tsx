@@ -1,11 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 import ApiOptions from '../interfaces/ApiOptions';
+import SearchContextValue from '../interfaces/SearchContextValue';
 
-export type updateSearchType = (newValue: Partial<ApiOptions>) => void
-
-interface SearchContextValue extends ApiOptions {
-  updateSearch: updateSearchType
-}
 const initialContext: SearchContextValue = {
   page: 1,
   limit: 10,
