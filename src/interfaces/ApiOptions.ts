@@ -1,7 +1,7 @@
 interface ApiOptions {
   page: number,
-  year_gte?: number,
-  year_lte?: number,
+  year_gte?: number | null,
+  year_lte?: number | null,
   q?: string,
   limit: number,
 }

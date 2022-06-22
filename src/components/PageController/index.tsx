@@ -57,12 +57,12 @@ export default function PaginationController({
         pageRangeDisplayed={2}
         onPageChange={handlePageClick}
       />
-      <Styled.Label htmlFor="page-size-controller">
+      <Styled.Label htmlFor="pagination-limit-input">
         Itens por pagina:
         {' '}
         <input
           data-testid="pagination-limit-input"
-          id="page-size-controller"
+          id="pagination-limit-input"
           type="number"
           placeholder="10"
           onChange={handleChange}

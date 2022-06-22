@@ -21,11 +21,20 @@ function Header({ updateSearch, totalCount }: Props) {
   };
 
   const handleMinYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearch({ year_gte: Number(e.target.value), page: 1 });
+    if (e.target.value !== '') {
+      updateSearch({ year_gte: Number(e.target.value), page: 1 });
+    } else {
+      updateSearch({ year_gte: null, page: 1 });
+    }
   };
 
   const handleMaxYearChange = (e: ChangeEvent<HTMLInputElement>) => {
     updateSearch({ year_lte: Number(e.target.value), page: 1 });
+    if (e.target.value !== '') {
+      updateSearch({ year_lte: Number(e.target.value), page: 1 });
+    } else {
+      updateSearch({ year_lte: null, page: 1 });
+    }
   };
 
   return (

@@ -22,9 +22,10 @@ export default function BookTable({ books }: Props) {
       <Styled.DetailsModal
         isOpen={showModal}
         onRequestClose={() => toggleModal()}
-        data-testid="modal"
       >
-        <h1>
+        <h1
+          data-testid="modal-title"
+        >
           Título:
           {' '}
           {modalData?.title}
@@ -78,7 +79,6 @@ export default function BookTable({ books }: Props) {
                   role="button"
                   data-testid="show-modal"
                   tabIndex={0}
-                  onKeyDown={() => toggleModal(book)}
                   onClick={() => toggleModal(book)}
                 >
                   Detalhes
