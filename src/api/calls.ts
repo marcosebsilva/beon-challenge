@@ -11,8 +11,11 @@ export async function getAllBooks(options: ApiOptions) {
       totalCount: Number(response.headers['x-total-count']),
     };
     return result;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    if (error.code === 'ERR_NETWORK') {
+      alert("Can't connect to jsonwebserver.");
+      throw new Error('Connection to server failed! Did you started the jsonwebserver?');
+    }
     throw error;
   }
 }
@@ -26,18 +29,11 @@ export async function getBooksByQuery(options: ApiOptions) {
       totalCount: Number(response.headers['x-total-count']),
     };
     return result;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
-
-export async function getBookById(id: number) {
-  try {
-    const response = await jsonwebserver.get(`/${id}`);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    if (error.code === 'ERR_NETWORK') {
+      alert("Can't connect to jsonwebserver.");
+      throw new Error('Connection to server failed! Did you started the jsonwebserver?');
+    }
     throw error;
   }
 }
