@@ -44,7 +44,9 @@ export default function PaginationController({
   };
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper
+      data-testid="pagination-controller"
+    >
       <Styled.Pagination
         pageCount={numberOfPages}
         marginPagesDisplayed={1}
@@ -59,13 +61,14 @@ export default function PaginationController({
         Itens por pagina:
         {' '}
         <input
+          data-testid="pagination-limit-input"
           id="page-size-controller"
           type="number"
           placeholder="10"
           onChange={handleChange}
         />
       </Styled.Label>
-      {showError && <Styled.ErrorMsg>{errorMsg}</Styled.ErrorMsg>}
+      {showError && <Styled.ErrorMsg data-testid="pagination-errorMsg">{errorMsg}</Styled.ErrorMsg>}
     </Styled.Wrapper>
   );
 }
