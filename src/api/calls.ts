@@ -20,9 +20,9 @@ export async function getBooksByQuery(options: ApiOptions) {
   const endpoint = Object.entries(options).reduce((acc: string, [key, value], idx) => {
     const parameter = `${key}=${value}`;
     if (idx === 0) return `${acc}_${parameter}`;
+    if (['page', 'limit'].includes(key)) return `${acc}&_${parameter}`;
     return `${acc}&${parameter}`;
   }, '?');
-
   try {
     const response = await jsonwebserver.get(endpoint);
     const result: ApiResponse = {
