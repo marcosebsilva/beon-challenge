@@ -12,6 +12,10 @@ export default createGlobalStyle`
   body {
    background-color: #f5f5f5;
   }
+  
+  button {
+    cursor: pointer;
+  }
 
   input {
     background-color: #f5f5f5;

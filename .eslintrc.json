@@ -24,6 +24,7 @@
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error",  { "ignoreRestSiblings": true }],
         "react/jsx-filename-extension": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
         "import/extensions": [
         "error",
         "ignorePackages",

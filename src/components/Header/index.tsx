@@ -37,10 +37,22 @@ function Header({ updateSearch, totalCount }: Props) {
     }
   };
 
+  const resetSearchParameters = () => {
+    updateSearch({
+      year_gte: null, year_lte: null, q: '', page: 1, limit: 10,
+    });
+  };
+
   return (
     <Styled.Wrapper data-testid="header">
       <Styled.TopSection>
-        <img src={beonLogo} alt="Icone da Beon" />
+        <div
+          onClick={resetSearchParameters}
+          role="button"
+          tabIndex={0}
+        >
+          <img src={beonLogo} alt="Icone da Beon" />
+        </div>
         <Styled.Form onSubmit={handleSubmit}>
           <input
             data-testid="input-query"

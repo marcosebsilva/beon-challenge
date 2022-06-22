@@ -22,6 +22,7 @@ export const TopSection = styled.section`
     position: relative;
     right: 20px;
     max-width: 150px;
+    cursor: pointer;
   }
 `;
 
