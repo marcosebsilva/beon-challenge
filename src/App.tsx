@@ -21,7 +21,7 @@ function App() {
         updateBooks(result);
       }
     } catch (error) {
-      console.log(error);
+      alert("Can't connect to jsonwebserver.");
       throw error;
     }
   }, [options]);

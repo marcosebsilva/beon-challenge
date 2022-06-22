@@ -13,7 +13,6 @@ export async function getAllBooks(options: ApiOptions) {
     return result;
   } catch (error: any) {
     if (error.code === 'ERR_NETWORK') {
-      alert("Can't connect to jsonwebserver.");
       throw new Error('Connection to server failed! Did you started the jsonwebserver?');
     }
     throw error;
@@ -31,7 +30,6 @@ export async function getBooksByQuery(options: ApiOptions) {
     return result;
   } catch (error: any) {
     if (error.code === 'ERR_NETWORK') {
-      alert("Can't connect to jsonwebserver.");
       throw new Error('Connection to server failed! Did you started the jsonwebserver?');
     }
     throw error;
