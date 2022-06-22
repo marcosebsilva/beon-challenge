@@ -1,6 +1,7 @@
 import jsonwebserver from './instance';
 import ApiOptions from '../interfaces/ApiOptions';
 import ApiResponse from '../interfaces/ApiResponse';
+import formatEndpoint from '../utils/formatEndpoint';
 
 export async function getAllBooks(options: ApiOptions) {
   try {
@@ -17,13 +18,7 @@ export async function getAllBooks(options: ApiOptions) {
 }
 
 export async function getBooksByQuery(options: ApiOptions) {
-  const endpoint = Object.entries(options).reduce((acc: string, [key, value], idx) => {
-    if (value == null) return acc;
-    const parameter = `${key}=${value}`;
-    if (idx === 0) return `${acc}_${parameter}`;
-    if (['page', 'limit'].includes(key)) return `${acc}&_${parameter}`;
-    return `${acc}&${parameter}`;
-  }, '?');
+  const endpoint = formatEndpoint(options);
   try {
     const response = await jsonwebserver.get(endpoint);
     const result: ApiResponse = {
