@@ -1,46 +1,77 @@
-# Getting Started with Create React App
+# BEON BOOKS LIST
+Tabela para listagem de livros feita para o processo seletivo da BEON.
+## Demo
+![Home demo image](/src/assets/readme/home.png?raw=true "Home")
+![Search demo image](src/assets/readme/search.png?raw=true "Search")
+![Modal demo image](src/assets/readme/modal.png?raw=true "Modal")
+## Funcionalidades
+- Buscar livros pelo título, autor ou idioma;
+- Listar livros;
+- Apresentar quantidade de registros encontrados
+- Paginar o resultado da busca com a quantidade desejada de itens
+- Filtrar livros pelo período (ano);
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tecnologias
 
-## Available Scripts
+As tecnologias usadas no projeto e o motivo pela qual usei elas foram:
 
-In the project directory, you can run:
+- [React](https://pt-br.reactjs.org) - Framework de front-end com o qual tenho maior experiência.
+- [TypeScript](https://www.typescriptlang.org/) - Linguagem de tipagem forte baseada no JavaScript. A tipagem é importante pra obter um código mais conciso e previsível.
+- [react-modal](https://www.npmjs.com/package/react-modal) - Pacote que simplifica a criação de modais no react.
+- [react-paginate](https://www.npmjs.com/package/react-paginate) - Pacote que facilita a criação de um componente para controlar a paginação.
+- [Cypress](https://www.cypress.io) - Biblioteca para testes de front-end simples de usar e bastante eficiente para testes e2e.
+- [styled-components](https://styled-components.com/docs/basics) - Biblioteca que me permite criar CSS-IN-JS a nivel de componente, facilitando na manuntenção e evitando problemas de nomenclaturas de classes, além de aproveitar a sintaxe de nesting, presente no SASS e no LESS, por exemplo
 
-### `npm start`
+## Instalação
+##### Siga as instruções para criar um servidor com jsonwebserver no seguinte link:`https://github.com/beonica/jsonserver`
+---------------
+ 
+Clone o projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+  git@github.com:marcosebsilva/beon-challenge.git.git
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Entre no diretório do projeto
 
-### `npm test`
+```bash
+  cd beon-challenge
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Instale as dependências
 
-### `npm run build`
+```bash
+  npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Inicie o projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+   npm start
+```
+Navegue até  `localhost:3000` em qualquer navegador.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ContextAPI & Hooks
+#### Esse projeto usa dois duas instâncias do ContextAPI, cada uma com seu respectivo hook utilitário:
+### useSearch()
+Permite acessar os valores que serão usados no endpoint que será usado pra resgatar os livros. Pode ser usado em qualquer componente encapsulado pelo **SearchProvider.** (*nesse caso, todo o aplicativo*);
 
-### `npm run eject`
+Retorna um objeto com todos os valores descritos na **interface do contexto**, presentes no mesmo arquivo. Qualquer valor padrão pode ser fornecido através da variável `initialContext`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#####[SearchContext](https://github.com/marcosebsilva/beon-challenge/blob/master/src/context/SearchContext.tsx)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### useBooks()
+Permite acessar e atualizar os livros resgatados pela API. Pode ser usado em qualquer component encapsulado pelo **BooksProvider.** (*novamente, todo o aplicativo*)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Retorna um objeto com dois valores:
+`updateSearch`: função que permite atualizar o array de livros
+`books`: array com os livros resgatados pela api.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#####[BooksContext](https://github.com/marcosebsilva/beon-challenge/blob/master/src/context/BooksContext.tsx)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testes
+Abre o Cypress com:
+```sh
+npm run cypress:open
+```
+Escolhe uma categoria de testes e execute qualquer uma das specs disponíveis.
