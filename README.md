@@ -29,7 +29,7 @@ As tecnologias usadas no projeto e o motivo pela qual usei elas foram:
 Clone o projeto
 
 ```bash
-  git@github.com:marcosebsilva/beon-challenge.git.git
+  git clone git@github.com:marcosebsilva/beon-challenge.git
 ```
 
 Entre no diretório do projeto
