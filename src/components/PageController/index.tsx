@@ -1,14 +1,21 @@
 import React, { useMemo, ChangeEvent, useState } from 'react';
-import useBooks from '../../context/BooksContext';
-import useSearch from '../../context/SearchContext';
+import { updateSearchType } from '../../context/SearchContext';
 import * as Styled from './style';
 
 interface ActivePageObject {
   selected: number,
 }
-export default function PaginationController() {
-  const { totalCount } = useBooks();
-  const { limit, page, updateSearch } = useSearch();
+
+interface Props {
+  limit: number,
+  page: number,
+  totalCount: number,
+  updateSearch: updateSearchType
+}
+
+export default function PaginationController({
+  limit, page, totalCount, updateSearch,
+}: Props) {
   const [showError, setShowError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>('');
 

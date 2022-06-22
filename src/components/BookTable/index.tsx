@@ -1,13 +1,12 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { getAllBooks, getBooksByQuery } from '../../api/calls';
-import useBooks from '../../context/BooksContext';
+import React, { useState } from 'react';
 import Book from '../../interfaces/Book';
-import useSearch from '../../context/SearchContext';
 import * as Styled from './style';
 
-export default function BookTable() {
-  const { updateBooks, books } = useBooks();
-  const options = useSearch();
+interface Props {
+  books: Book[]
+}
+
+export default function BookTable({ books }: Props) {
   const [modalData, setModalData] = useState<Book | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -15,26 +14,6 @@ export default function BookTable() {
     setModalData(book);
     setShowModal((prev) => !prev);
   };
-
-  const handleUpdateOptions = useCallback(async () => {
-    try {
-      const { updateSearch, ...optionsWithoutUpdateFunction } = options;
-      if (options.q || options.year_gte !== undefined || options.year_lte !== undefined) {
-        const result = await getBooksByQuery(optionsWithoutUpdateFunction);
-        updateBooks(result);
-      } else {
-        const result = await getAllBooks(optionsWithoutUpdateFunction);
-        updateBooks(result);
-      }
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }, [options]);
-
-  useEffect(() => {
-    handleUpdateOptions();
-  }, [options]);
 
   const tableHeads = ['Livro', 'Autor', 'Idioma', 'Ano', 'Acões'];
 

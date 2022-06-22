@@ -1,13 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import useBooks from '../../context/BooksContext';
-import useSearch from '../../context/SearchContext';
 import beonLogo from '../../assets/images/beon-logo-roxo.png';
 import * as Styled from './style';
+import { updateSearchType } from '../../context/SearchContext';
 
-function Header() {
-  const { updateSearch } = useSearch();
+interface Props {
+  updateSearch: updateSearchType
+  totalCount: number,
+}
+
+function Header({ updateSearch, totalCount }: Props) {
   const [query, setQuery] = useState<string>('');
-  const { totalCount } = useBooks();
 
   const handleInputQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
