@@ -22,6 +22,7 @@ export default function BookTable({ books }: Props) {
       <Styled.DetailsModal
         isOpen={showModal}
         onRequestClose={() => toggleModal()}
+        data-testid="modal"
       >
         <h1>
           Título:
@@ -67,11 +68,11 @@ export default function BookTable({ books }: Props) {
         </thead>
         <tbody>
           {books.map((book) => (
-            <tr key={book.title}>
-              <td>{book.title}</td>
-              <td>{book.author}</td>
-              <td>{book.language}</td>
-              <td>{book.year}</td>
+            <tr key={book.title} data-testid="table-item">
+              <td data-testid="table-item-title">{book.title}</td>
+              <td data-testid="table-item-author">{book.author}</td>
+              <td data-testid="table-item-language">{book.language}</td>
+              <td data-testid="table-item-year">{book.year}</td>
               <td>
                 <Styled.ToggleModal
                   role="button"
