@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Book from '../../interfaces/Book';
+import Book from '../../types/Book';
 import * as Styled from './style';
 
-interface Props {
+interface BookTableProps {
   books: Book[]
 }
 
-export default function BookTable({ books }: Props) {
+export default function BookTable({ books }: BookTableProps) {
   const [modalData, setModalData] = useState<Book | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 

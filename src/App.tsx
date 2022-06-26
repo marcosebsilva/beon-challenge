@@ -1,43 +1,48 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import BookTable from './components/BookTable';
 import Header from './components/Header';
-import PageController from './components/PageController';
-import useBooks from './context/BooksContext';
-import useSearch from './context/SearchContext';
-import { getAllBooks, getBooksByQuery } from './api/calls';
+import PageController from './components/PaginationController';
+import getBooks from './api/calls';
+import ApiOptions from './types/ApiOptions';
+import ApiResponse from './types/ApiResponse';
 
 function App() {
-  const { updateBooks, books, totalCount } = useBooks();
-  const options = useSearch();
+  const [{ books, totalCount }, updateBooks] = useState<ApiResponse>({ books: [], totalCount: 0 });
+  const [searchOptions, setSearchOptions] = useState<ApiOptions>({
+    limit: 10,
+    year_gte: null,
+    page: 1,
+  });
 
   const handleUpdateOptions = useCallback(async () => {
     try {
-      const { updateSearch, ...optionsWithoutUpdateFunction } = options;
-      if (options.q || options.year_gte !== undefined || options.year_lte !== undefined) {
-        const result = await getBooksByQuery(optionsWithoutUpdateFunction);
-        updateBooks(result);
-      } else {
-        const result = await getAllBooks(optionsWithoutUpdateFunction);
-        updateBooks(result);
-      }
+      const result = await getBooks(searchOptions);
+      updateBooks(result);
     } catch (error) {
       alert("Can't connect to jsonwebserver.");
       throw error;
     }
-  }, [options]);
+  }, [searchOptions]);
 
   useEffect(() => {
     handleUpdateOptions();
-  }, [options]);
+  }, [searchOptions]);
   return (
     <>
-      <Header updateSearch={options.updateSearch} totalCount={totalCount} />
-      <BookTable books={books} />
-      <PageController
-        limit={options.limit}
-        page={options.page}
+      <Header
+        updateSearch={setSearchOptions}
+        searchOptions={searchOptions}
         totalCount={totalCount}
-        updateSearch={options.updateSearch}
+      />
+      <BookTable
+        books={books}
+      />
+      <PageController
+        searchOptions={searchOptions}
+        limit={searchOptions.limit}
+        page={searchOptions.page}
+        totalCount={totalCount}
+        updateSearch={setSearchOptions}
       />
     </>
   );

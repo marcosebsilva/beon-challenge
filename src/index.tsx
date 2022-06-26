@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import Modal from 'react-modal';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { SearchProvider } from './context/SearchContext';
-import { BooksProvider } from './context/BooksContext';
 import GlobalStyles from './globalStyles';
 
 const root = ReactDOM.createRoot(
@@ -16,11 +14,7 @@ Modal.setAppElement('#root');
 root.render(
   <React.StrictMode>
     <GlobalStyles />
-    <SearchProvider>
-      <BooksProvider>
-        <App />
-      </BooksProvider>
-    </SearchProvider>
+    <App />
   </React.StrictMode>,
 );
 

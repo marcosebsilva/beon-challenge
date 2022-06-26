@@ -1,14 +1,16 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import ApiOptions from '../../types/ApiOptions';
+import UpdateSearchFunction from '../../types/UpdateSearchFunction';
 import beonLogo from '../../assets/images/beon-logo-roxo.png';
 import * as Styled from './style';
-import { updateSearchType } from '../../interfaces/SearchContextValue';
 
-interface Props {
-  updateSearch: updateSearchType
+interface HeaderProps {
+  updateSearch: UpdateSearchFunction,
   totalCount: number,
+  searchOptions: ApiOptions,
 }
 
-function Header({ updateSearch, totalCount }: Props) {
+function Header({ updateSearch, totalCount, searchOptions }: HeaderProps) {
   const [query, setQuery] = useState<string>('');
 
   const handleInputQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,29 +19,33 @@ function Header({ updateSearch, totalCount }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateSearch({ q: query, page: 1 });
+    updateSearch({
+      ...searchOptions,
+      q: query === '' ? null : query,
+    });
   };
 
   const handleMinYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value !== '') {
-      updateSearch({ year_gte: Number(e.target.value), page: 1 });
-    } else {
-      updateSearch({ year_gte: null, page: 1 });
-    }
+    updateSearch({
+      ...searchOptions,
+      year_gte: e.target.value === '' ? null : Number(e.target.value),
+    });
   };
 
   const handleMaxYearChange = (e: ChangeEvent<HTMLInputElement>) => {
-    updateSearch({ year_lte: Number(e.target.value), page: 1 });
-    if (e.target.value !== '') {
-      updateSearch({ year_lte: Number(e.target.value), page: 1 });
-    } else {
-      updateSearch({ year_lte: null, page: 1 });
-    }
+    updateSearch({
+      ...searchOptions,
+      year_lte: e.target.value === '' ? null : Number(e.target.value),
+    });
   };
 
   const resetSearchParameters = () => {
     updateSearch({
-      year_gte: null, year_lte: null, q: '', page: 1, limit: 10,
+      year_gte: null,
+      year_lte: null,
+      q: query === '' ? null : query,
+      page: 1,
+      limit: 10,
     });
   };
 

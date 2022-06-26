@@ -3,7 +3,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { SinonStub } from 'cypress/types/sinon';
-import PageController from '../../src/components/PageController';
+import PageController from '../../src/components/PaginationController';
 
 describe('BookTable', () => {
   let stubbedUpdateSearch: SinonStub;
