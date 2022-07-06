@@ -1,10 +1,20 @@
-import ApiOptions from '../interfaces/ApiOptions';
+import ApiOptions from '../types/ApiOptions';
 
-export default (options: ApiOptions) => Object.entries(options)
+type underlinedOptionsType = string[];
+
+export default (options: ApiOptions, underlinedOptions: underlinedOptionsType = ['page', 'limit']) => Object.entries(options)
   .reduce((acc: string, [key, value], idx) => {
     if (value == null) return acc;
-    const parameter = `${key}=${value}`;
-    if (idx === 0) return `${acc}_${parameter}`;
-    if (['page', 'limit'].includes(key)) return `${acc}&_${parameter}`;
-    return `${acc}&${parameter}`;
+
+    let parameter = `${key}=${value}`;
+
+    if (underlinedOptions.includes(key)) {
+      parameter = `_${key}=${value}`;
+    } else {
+      parameter = `${key}=${value}`;
+    }
+
+    return idx === 0
+      ? `${acc}${parameter}`
+      : `${acc}&${parameter}`;
   }, '?');

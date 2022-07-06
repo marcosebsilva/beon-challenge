@@ -1,45 +1,65 @@
 import React, { useMemo, ChangeEvent, useState } from 'react';
-import { updateSearchType } from '../../interfaces/SearchContextValue';
+import ApiOptions from '../../types/ApiOptions';
 import * as Styled from './style';
+import UpdateSearchFunction from '../../types/UpdateSearchFunction';
 
 interface ActivePageObject {
   selected: number,
 }
 
-interface Props {
+interface PaginationControllerProps {
   limit: number,
   page: number,
   totalCount: number,
-  updateSearch: updateSearchType
+  updateSearch: UpdateSearchFunction
+  searchOptions: ApiOptions,
 }
 
 export default function PaginationController({
-  limit, page, totalCount, updateSearch,
-}: Props) {
-  const [showError, setShowError] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  limit, page, totalCount, updateSearch, searchOptions,
+}: PaginationControllerProps) {
+  const [limitError, setLimitError] = useState<{show: boolean, msg: string}>({
+    show: false,
+    msg: '',
+  });
 
   const numberOfPages = useMemo(() => Math.ceil(totalCount / limit), [totalCount, limit]);
   const currentPage = useMemo(() => page - 1, [page]);
 
   const handlePageClick = ({ selected }: ActivePageObject) => {
-    updateSearch({ page: selected + 1 });
+    updateSearch({
+      ...searchOptions,
+      page: selected + 1,
+    });
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newLimit = Number(e.target.value);
     if (newLimit < 5) {
-      setShowError(true);
-      setErrorMsg('Quantidade mínima permitida é 5.');
-      updateSearch({ limit: 5 });
+      setLimitError({
+        show: true,
+        msg: 'Quantidade mínima permitida é 5.',
+      });
+      updateSearch({
+        ...searchOptions,
+        limit: 5,
+      });
     } else if (newLimit > 50) {
-      setShowError(true);
-      setErrorMsg('Quantidade máxima permitida é 50.');
-      updateSearch({ limit: 50 });
+      setLimitError({
+        show: true,
+        msg: 'Quantidade máxima permitida é 50.',
+      });
+      updateSearch({
+        ...searchOptions,
+        limit: 50,
+      });
     } else {
-      setErrorMsg('');
-      setShowError(false);
-      updateSearch({ limit: newLimit });
+      setLimitError({ show: false, msg: '' });
+
+      updateSearch({
+        ...searchOptions,
+        limit: newLimit,
+      });
     }
   };
 
@@ -68,7 +88,7 @@ export default function PaginationController({
           onChange={handleChange}
         />
       </Styled.Label>
-      {showError && <Styled.ErrorMsg data-testid="pagination-errorMsg">{errorMsg}</Styled.ErrorMsg>}
+      {limitError.show && <Styled.ErrorMsg data-testid="pagination-errorMsg">{limitError.msg}</Styled.ErrorMsg>}
     </Styled.Wrapper>
   );
 }
